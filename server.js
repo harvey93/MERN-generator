@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./api/routes');
 require("./api/models/Genre");
@@ -19,7 +19,6 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 
 server.use('/api', routes);
-
 
 server.get('/', (req, res) => {
   res.render('index');
