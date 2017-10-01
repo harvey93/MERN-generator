@@ -11,6 +11,17 @@ module.exports.getGenres = function(req, res) {
   });
 };
 
+module.exports.getGenre = function(req, res) {
+  const _id = req.params._id;
+  Genre.findById(_id, (err, genre) => {
+    if (err){
+      res.send(err);
+    }else {
+      res.json(genre);
+    }
+  });
+};
+
 module.exports.addGenre = (req, res) => {
   const body = req.body;
   Genre.create(body, function(err, genre){
