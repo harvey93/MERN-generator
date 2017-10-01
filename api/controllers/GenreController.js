@@ -12,8 +12,8 @@ module.exports.getGenres = function(req, res) {
 };
 
 module.exports.addGenre = (req, res) => {
-  const genre = req.body;
-  Genre.create(genre, function(err, genre){
+  const body = req.body;
+  Genre.create(body, function(err, genre){
       if(err){
           throw err;
       }else {
@@ -21,13 +21,17 @@ module.exports.addGenre = (req, res) => {
       }
   });
 };
-// app.post('/api/genres', function(req, res){
-//     var genre = req.body;
-    // Genre.addGenre(genre, function(err, genre){
-    //     if(err){
-    //         throw err;
-    //     }else {
-    //         res.json(genre);
-    //     }
-    // });
-// });
+
+module.exports.updateGenre = (req, res) => {
+  const body = req.body;
+  const _id = req.params._id;
+  const query = {_id};
+  const update = {name: body.name};
+  Genre.findOneAndUpdate(query, update, {new: true}, (err, genre) => {
+    if(err){
+      throw err;
+    }else {
+      res.json(genre);
+    }
+  });
+};
