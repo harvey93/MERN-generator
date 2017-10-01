@@ -46,3 +46,15 @@ module.exports.updateGenre = (req, res) => {
     }
   });
 };
+
+module.exports.deleteGenre = (req, res) => {
+  const _id = req.params.id;
+  const query = {_id};
+  Genre.remove(query, (err, genre) => {
+      if(err){
+          throw err;
+      }else {
+          res.json(genre);
+      }
+  });
+};
